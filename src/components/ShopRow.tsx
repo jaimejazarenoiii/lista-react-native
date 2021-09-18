@@ -23,7 +23,7 @@ export const ShopRow: React.FC<Props> = (props) => {
 
   function renderItem({ item, index }: { item: ShopInterface, index: number }) {
     const { name, date, budgetAmount, items } = item || {}
-    return <View style={ styles.container }>
+    return <View style={ [styles.container, index + 1 == props.shops.length ? styles.paddingBelow : null] }>
       <View style={ styles.leftContainer }>
         <Text style={ styles.title }>{ name }</Text>
         <Text style={ styles.dateLabel }>{ date.toLocaleString() }</Text>
@@ -58,10 +58,13 @@ export const ShopRow: React.FC<Props> = (props) => {
   )
 }
 const styles = StyleSheet.create({
+  paddingBelow: {
+    paddingBottom: 20
+  },
   container: {
     backgroundColor: '#fff',
     minHeight: 100,
-    marginBottom: 20,
+    marginTop: 20,
     borderRadius: 10,
     flexDirection: 'row'
   },
@@ -78,7 +81,9 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 23,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    textShadowColor: 'rgba(0, 0, 0, 0.5)',
+    textShadowRadius: 5
   },
   dateLabel: {
     fontSize: 14

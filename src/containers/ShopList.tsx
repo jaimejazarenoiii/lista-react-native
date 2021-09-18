@@ -15,7 +15,10 @@ import { ShopForm } from './ShopForm'
 import { ShopRow } from '../components/ShopRow'
 const { width, height } = Dimensions.get('window');
 
-interface Props { }
+interface Props {
+  navigation: any,
+  route: any
+}
 export const ShopList: React.FC<Props> = (props) => {
   const [count, setCount] = useState(0)
   const [modalVisible, setModalVisible] = useState(false)
@@ -24,22 +27,24 @@ export const ShopList: React.FC<Props> = (props) => {
     setModalVisible(!modalVisible)
   }
 
-  return (
-    <View style={ styles.containerView }>
-      <View style={ styles.topView }>
-        <Text style={ styles.largeTitle }>
-          Shopping Sessions
-        </Text>
+  React.useLayoutEffect(() => {
+    props.navigation.setOptions({
+      headerRight: () => (
         <TouchableHighlight onPress={ displayPopup }
           style={ styles.button } underlayColor='transparent'>
           <Text style={ styles.buttonText }>Add Shop</Text>
         </TouchableHighlight>
-      </View>
+      ),
+    })
+  }, [props.navigation]);
+
+  return (
+    <View style={ styles.containerView }>
       <ShopRow shops={ shops }/>
       <Modal
         animationType="slide"
         transparent={true}
-        visible={modalVisible}
+        visible={ modalVisible }
         onRequestClose={() => {
           setModalVisible(!modalVisible);
         }}
@@ -58,15 +63,9 @@ const styles = StyleSheet.create({
   containerView: {
     flexDirection: 'column',
     justifyContent: 'space-between',
-    padding: 20,
+    paddingHorizontal: 20,
     height: "100%",
     backgroundColor: '#F2F2F7'
-  },
-  topView: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 30
   },
   largeTitle: {
     fontSize: 20,
