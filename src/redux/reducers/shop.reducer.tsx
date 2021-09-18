@@ -1,4 +1,4 @@
-import { REFRESH_LIST, ADD_SHOP, UPDATE_SHOP, ShopInterface, ShopActionTypes } from '../types';
+import { REFRESH_LIST, ADD_SHOP, UPDATE_SHOP, ShopInterface, ShopActionTypes } from '../types'
 
 interface ShopState {
   shops: ShopInterface[]

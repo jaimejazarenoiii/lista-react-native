@@ -1,8 +1,8 @@
-import { request, failure } from './common.actions';
-import { ADD_SHOP, UPDATE_SHOP, REFRESH_LIST } from '../types';
-import { shopsService } from '../../services';
+import { request, failure } from './common.actions'
+import { ADD_SHOP, UPDATE_SHOP, REFRESH_LIST } from '../types'
+import { shopsService } from '../../services'
 import { ShopInterface, ShopActionTypes, ShopSessionStatus } from '../types'
-import { ActionCreator } from 'redux';
+import { ActionCreator } from 'redux'
 
 const refreshListSuccess: ActionCreator<ShopActionTypes> = (shops: ShopInterface[]) => {
   return { type: REFRESH_LIST, payload: shops }
@@ -30,12 +30,12 @@ export function refreshList() {
   }
 }
 
-export function addShop() {
+export function addShop(name: string, budgetAmount: number) {
   const shop: ShopInterface = {
     id: '100',
-    name: 'Tax',
+    name: name,
     items: [],
-    budgetAmount: 4000,
+    budgetAmount: budgetAmount,
     date: new Date(),
     status: ShopSessionStatus.Active
   }

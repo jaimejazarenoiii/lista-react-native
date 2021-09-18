@@ -1,5 +1,6 @@
-import { testData } from '../extra/testData.extra';
-import { ShopInterface } from '../redux/types';
+import { testData } from '../extra/testData.extra'
+import { ShopInterface } from '../redux/types'
+import Realm from "realm"
 
 export const shopsService = {
     refresh,
