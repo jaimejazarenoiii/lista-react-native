@@ -3,8 +3,8 @@ import { ImgInterface } from "./common.types"
 import { ItemInterface } from './items.types'
 
 export enum ShopSessionStatus {
-  Active = 0,
-  Inactive = 1
+  Active,
+  Inactive
 }
 
 export class ShopInterface {

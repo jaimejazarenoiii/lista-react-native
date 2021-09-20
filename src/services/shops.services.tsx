@@ -24,23 +24,25 @@ async function addShop({ shop }: { shop: ShopInterface }) : Promise<Realm.Result
         schema: [ShopInterface],
     })
     // return await getFromServer('/api/');
-    try {
-        realm.write(() => {
-            let cache = realm.create("Shop", {
-                _id: '1',
-                name: shop.name,
-                date: new Date(),
-                budgetAmount: shop.budgetAmount,
-                status: ShopSessionStatus[shop.status]
-            })
-            console.log("AHOHO " + cache)
-        })
-    } catch (e) {
-        console.log("Error on creation " + e)
-    }
-    let shops = realm.objects("Shop")
-    console.log("SOMETHING " + shops)
-    return shops
+    return await new Promise((resolve, reject) => {
+     try {
+       let modifiedDbObjects = []
+         realm.write(() => {
+             realm.create("Shop", {
+                 _id: '1',
+                 name: shop.name,
+                 date: new Date(),
+                 budgetAmount: shop.budgetAmount,
+                 status: ShopSessionStatus[shop.status]
+             })
+             let shops = realm.objects("Shop")
+             console.log("SOMETHING " + shops)
+             resolve(shops)
+         })
+     } catch (e) {
+       reject(e)
+     }
+   })
 }
 
 async function updateShop({ shop }: { shop: ShopInterface }): Promise<ShopInterface[]> {
