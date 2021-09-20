@@ -4,7 +4,7 @@ import { shopsService } from '../../services'
 import { ShopInterface, ShopActionTypes, ShopSessionStatus } from '../types'
 import { ActionCreator } from 'redux'
 
-const refreshListSuccess: ActionCreator<ShopActionTypes> = (shops: ShopInterface[]) => {
+const refreshListSuccess: ActionCreator<ShopActionTypes> = (shops: Promise<Realm.Results<any>>) => {
   return { type: REFRESH_LIST, payload: shops }
 }
 
@@ -12,7 +12,7 @@ const updateShopSuccess: ActionCreator<ShopActionTypes> = (shops: ShopInterface[
   return { type: UPDATE_SHOP, payload: shops };
 }
 
-const addShopSuccess: ActionCreator<ShopActionTypes> = (shops: ShopInterface[]) => {
+const addShopSuccess: ActionCreator<ShopActionTypes> = (shops: Promise<Realm.Results<any>>) => {
   return { type: ADD_SHOP, payload: shops};
 }
 
@@ -25,6 +25,7 @@ export function refreshList() {
           dispatch(refreshListSuccess(response))
         },
         error => {
+          console.log(error)
           dispatch(failure('Server error.'))
         })
   }
@@ -32,13 +33,13 @@ export function refreshList() {
 
 export function addShop(name: string, budgetAmount: number) {
   const shop: ShopInterface = {
-    id: '100',
+    _id: '100',
     name: name,
-    items: [],
-    budgetAmount: budgetAmount,
+    budgetAmount: '1000',
     date: new Date(),
     status: ShopSessionStatus.Active
   }
+  console.log(shop)
   return dispatch => {
     dispatch(request());
     return shopsService.addShop({ shop })

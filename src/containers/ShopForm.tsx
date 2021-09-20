@@ -16,19 +16,19 @@ const { width, height } = Dimensions.get('window')
 interface Props { onDismiss: () => void }
 export const ShopForm: React.FC<Props> = (props) => {
   const [name, onChangeName] = useState<string>('')
-  const [budget, onChangeBudget] = useState<number>(0)
+  let [budget, onChangeBudget] = useState<number>(0)
   const dispatch = useDispatch()
 
   function closeModal() {
     props.onDismiss()
   }
 
-  function onChangedBudgetText(budget: string) {
+  function onChangedBudgetText(budgetAmount: string) {
+    budget = Number(budgetAmount)
   }
 
   function save() {
-    Alert.alert("HAHAHA")
-    dispatch(addShop())
+    dispatch(addShop(name, budget))
     closeModal()
   }
 

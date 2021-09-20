@@ -24,6 +24,7 @@ export const ShopList: React.FC<Props> = (props) => {
   const [modalVisible, setModalVisible] = useState(false)
   const { shops } = useSelector((state: RootState) => state.shops)
   function displayPopup() {
+    console.log("tweet")
     setModalVisible(!modalVisible)
   }
 
