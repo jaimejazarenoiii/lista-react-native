@@ -8,29 +8,27 @@ export const shopsService = {
     updateShop,
 };
 
-
-
 async function refresh(): Promise<Realm.Results<any>> {
-    const realm = await new Realm({
-        schema: [ShopInterface],
-        migration: function(oldRealm, newRealm) {
-            newRealm.deleteAll();
-        }
-    })
-    let shops = realm.objects("Shop")
-    console.log("ZXCXZCXZ " + shops)
-    return realm.objects("Shop")
+  const realm = await new Realm({
+    schema: [ShopInterface],
+    migration: function (oldRealm, newRealm) {
+      newRealm.deleteAll();
+    },
+  });
+  let shops = realm.objects("Shop")
+  console.log("ZXCXZCXZ " + shops)
+  return realm.objects("Shop")
 }
 
 async function addShop({ shop }: { shop: ShopInterface }) : Promise<Realm.Results<ShopInterface>> {
-    console.log("NAGDAAN dito")
-    const realm = await new Realm({
-        schema: [ShopInterface],
-        migration: function(oldRealm, newRealm) {
-            newRealm.deleteAll();
-        }
-    })
-    console.log("NAGDAAN dito palusot6")
+  console.log("NAGDAAN dito")
+  const realm = await new Realm({
+    schema: [ShopInterface],
+    migration: function(oldRealm, newRealm) {
+      newRealm.deleteAll();
+    },
+  })
+  console.log("NAGDAAN dito palusot6")
     // return await getFromServer('/api/');
     return await new Promise((resolve, reject) => {
         try {
